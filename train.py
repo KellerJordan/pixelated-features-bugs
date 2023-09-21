@@ -61,7 +61,7 @@ if __name__ == '__main__':
     os.makedirs(save_dir, exist_ok=True)
 
     bs = 500
-    train_augs = dict(flip=True, translate=2, cutout=8, pixelate=pixelate_option)
+    train_augs = dict(flip=True, translate=2, pixelate=pixelate_option)
     train_loader = CifarLoader('cifar10/', train=True, batch_size=bs, aug=train_augs)
     test_augs = dict(pixelate=pixelate_option)
     test_loader = CifarLoader('cifar10/', train=False, batch_size=2*bs, aug=test_augs)
