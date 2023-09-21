@@ -220,7 +220,7 @@ class VGG(nn.Module):
         self.vgg_name = vgg_name
         self.features = self._make_layers(cfg[vgg_name])
         # this must be changed depending on pixelation option, because VGG flattens after final conv
-        self.classifier = nn.Linear(512*mult**2, 10)
+        self.classifier = nn.Linear(int(512*mult**2), 10)
 
     def forward(self, x):
         out = self.features(x)
@@ -245,8 +245,7 @@ class VGG(nn.Module):
 def construct_vgg11(pixelate_option):
     a, b = pixelate_option
     assert 32 % a == 0
-    assert b % a == 0
-    mult = b//a
+    mult = b/a
     return VGG('VGG11', mult).cuda()
 
 
