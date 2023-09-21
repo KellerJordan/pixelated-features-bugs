@@ -55,7 +55,7 @@ def train(construct_fn, epochs, lr, name):
     torch.save(model.state_dict(), os.path.join(save_dir, f'model_{name}.pt'))
 
 if __name__ == '__main__':
-    pixelate_option = (2, 4)
+    pixelate_option = (2, 5)
 
     save_dir = 'cifar_nocutout_%d_%d_v1' % pixelate_option
     os.makedirs(save_dir, exist_ok=True)
