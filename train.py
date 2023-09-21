@@ -66,8 +66,8 @@ if __name__ == '__main__':
     test_augs = dict(pixelate=pixelate_option)
     test_loader = CifarLoader('cifar10/', train=False, batch_size=2*bs, aug=test_augs)
 
-    #train(construct_rn9, 32, 0.5, 'resnet9')
-    #train(construct_speedyrn, 24, 0.5, 'speedyresnet')
-    #train(construct_vgg11, 32, 0.05, 'vgg11')
+    train(construct_rn9, 32, 0.5, 'resnet9')
+    train(construct_speedyrn, 24, 0.5, 'speedyresnet')
+    train(construct_vgg11, 32, 0.05, 'vgg11')
     train(construct_rn18, 24, 0.5, 'resnet18')
 
