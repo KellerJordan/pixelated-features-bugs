@@ -61,7 +61,7 @@ def construct_rn9(pixelate_option):
         Mul(0.2)
     )
     model = model.to(memory_format=torch.channels_last)
-    return model
+    return model.cuda()
 
 
 ## SpeedyResNet
@@ -203,7 +203,7 @@ def construct_speedyrn(pixelate_option):
                                    aug=dict(pixelate=pixelate_option))))[0]
     init_whitening_conv(net.net_dict['initial_block']['whiten'], images, pad=2)
 
-    return net
+    return net.float().cuda()
 
 ## VGG
 # https://github.com/kuangliu/pytorch-cifar/blob/master/models/vgg.py
@@ -224,7 +224,7 @@ class VGG(nn.Module):
 
     def forward(self, x):
         out = self.features(x)
-        out = out.view(out.size(0), -1)
+        out = out.reshape(len(out), -1)
         out = self.classifier(out)
         return out
 
@@ -245,8 +245,9 @@ class VGG(nn.Module):
 def construct_vgg11(pixelate_option):
     a, b = pixelate_option
     assert 32 % a == 0
-    mult = (32//a)*b
-    return VGG('VGG11', mult)
+    assert b % a == 0
+    mult = b//a
+    return VGG('VGG11', mult).cuda()
 
 
 ## ResNet18
@@ -316,5 +317,5 @@ class ResNet(nn.Module):
         return out
 
 def construct_rn18(pixelate_option):
-    return ResNet(BasicBlock, [2,2,2,2], num_classes=10)
+    return ResNet(BasicBlock, [2,2,2,2], num_classes=10).cuda()
 
