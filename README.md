@@ -2,4 +2,5 @@
 ```
 python train.py
 python generate.py
+python analyze.py
 ```
