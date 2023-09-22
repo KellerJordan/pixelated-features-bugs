@@ -57,7 +57,7 @@ def train(construct_fn, epochs, lr, name):
 if __name__ == '__main__':
     pixelate_option = (2, 5)
 
-    save_dir = 'cifar_nocutout_%d_%d_v1' % pixelate_option
+    save_dir = 'cifar_%d_%d_v5' % pixelate_option
     os.makedirs(save_dir, exist_ok=True)
 
     bs = 500
